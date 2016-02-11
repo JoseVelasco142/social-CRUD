@@ -1,0 +1,17 @@
+// Created by root on 31/01/16.
+extends layout
+
+block content
+    body
+        // NAVBAR LOCATION
+        #navigationMenu.col-xs-11.btn-group-lg.nav.navbar-nav
+            a#home.col-xs-1.btn.glyphicon.glyphicon-home(href="#")
+            a#logOut.col-xs-1.btn.glyphicon.glyphicon-log-out(type='button')
+        .clearfix
+
+        #dbSelection.container
+            #litleMongo.well-lg
+                #sqLite.col-xs-12.col-sm-6.col-md-6.col-lg-6.btn
+                    img(src='/images/sqlite-icon.png')
+                #Mongo.col-xs-12.col-sm-6.col-md-6.col-lg-6.btn
+                    img(src='/images/mongodb-iconbox.png')

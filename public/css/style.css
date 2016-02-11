@@ -1,0 +1,334 @@
+/* Login  */
+#newUser, #logIn {
+    padding: 5%;
+    margin-top: 5%;
+    background: lightgray;
+    height: 450px;
+    font-family: "Roboto", fantasy;
+}
+
+#newUser h1, #logIn h1 {
+    text-align: center;
+    font-size: 225%;
+    font-weight: bold;
+    margin-bottom: 10%;
+}
+
+#newUser label, #logIn label {
+    margin-bottom: 5%;
+    font-size: 150%;
+    line-height: 35px;
+}
+
+#newUser input, #logIn input {
+    margin-bottom: 5%;
+    border-radius: 10px;
+}
+
+#sendLogIn {
+    padding: 2.5%;
+    background: black;
+    color: white;
+    font-weight: bolder;
+    font-family: "Roboto", fantasy;
+    margin-top: 5%;
+    letter-spacing: 2px;
+}
+
+#sendLogIn:hover {
+    background: darkgrey;
+    color: black;
+}
+
+#register_label {
+    text-align: center;
+}
+
+
+/* SOCIAL LOGIN */
+.btnLoginSocial, .btnRegisterSocial, #register_go {
+    padding: 0;
+    background: black;
+    color: white;
+    font-weight: bolder;
+    font-family: "Roboto", fantasy;
+    margin-bottom: 10%;
+    letter-spacing: 3px;
+}
+
+.btnLoginSocial:hover , .btnRegisterSocial:hover, #register_go:hover {
+    background: darkgrey;
+    color: black;
+}
+
+.btnLoginSocial img, .btnRegisterSocial img {
+    width: 12.5%;
+    height: auto;
+}
+
+/* NAVIGATION MENU */
+#navigationMenu {
+    margin: 0 0 0 4% !important;
+    padding-bottom: 0.5%;
+    border-radius: 0 0 5px 5px;
+    background: #3B5998;
+}
+
+#navigationMenu a {
+    color: black;
+    font-size: 150%;
+    padding: 0.5%;
+    margin-top: 0.5%;
+}
+
+#navigationMenu a:hover {
+    color: white;
+}
+
+/* DB SELECTOR */
+#sqLite, #Mongo {
+    margin-top: 5%;
+    background: lightgray;
+    height: 300px;
+    padding: 5% 15% 15%;
+}
+
+#sqLite:hover, #Mongo:hover {
+    border-bottom: 5px solid black;
+}
+
+/* VIEWS */
+/* TABLE SELECTOR */
+#tableSelector {
+    margin-top: 0.5%;
+}
+
+#tableSelector .btnTableSelector {
+    color: black;
+    background-color: white;
+    font-size: 135%;
+}
+
+#tableSelector .btnTableSelector:hover {
+    color: white;
+    background-color: black;
+}
+
+/* PAGINATION // NEW BUTTON*/
+#pager_new {
+    background: #3B5998;
+    padding: 0;
+    border-radius: 0 0 10px 10px;
+}
+
+#pager_new .pager-list {
+    font-size: 110%;
+    font-family: "Roboto", fantasy;
+}
+
+#pager_new .pager-list .pager {
+    padding: 1.5% 3% 1.5% 3%;
+    font-size: 105%;
+    margin: 2.5% 0 1% 0;
+    font-weight: bolder;
+}
+
+#pager_new .newElement {
+    margin: 1.5% 0 0.5% 0;
+    color: black;
+    background-color: white;
+    font-size: 125%;
+}
+
+#pager_new .newElement:hover {
+    color: white;
+    background-color: black;
+}
+
+/* VISOR */
+#dataViewer {
+    margin-top: 1.5%;
+}
+
+/* SEARCH BAR */
+#searchBar {
+    margin: 0.5% 0 0.5% 0;
+}
+
+#searchBar #searchBox {
+    border: 1px solid black;
+    border-radius: 10px 3px 3px 10px;
+    background: darkgrey;
+    padding: 2.5% 0.5% 2.5% 2.5%;
+}
+
+#searchBar #searchBox:focus {
+    background: white;
+}
+
+#searchBar #searchButton {
+    font-size: 115%;
+    color: white;
+    width: 27.5% !important;
+    border-radius: 0 30px 30px 0;
+    background-color: black;
+    padding: 0.75% 0 0.75% 0;
+    font-weight: bolder;
+}
+
+#searchBar #searchButton:hover {
+    color: black;
+    background-color: white;
+}
+
+/* LIST HEADER */
+#header {
+    font-weight: bolder;
+    font-size: 115%;
+    background: #3B5998 none;
+    padding: 0.5%;
+}
+
+#header a {
+    margin-top: 0.5%;
+    padding: 0.5%;
+    color: white;
+    background: black;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+}
+
+#header a.glyphicon.sort {
+    width: 25% !important;
+    padding: 3.5% !important;
+    margin: 3.5% 2% 0 2% !important;
+}
+
+#header a.glyphicon:hover {
+    background: lightgrey;
+    color: black;
+}
+
+#header div.last_sort a.glyphicon.sort {
+    width: 45% !important;
+    padding: 7.5% !important;
+    margin: 3.5% 1.5% 0 0 !important;
+}
+
+@media (min-width: 62em) {
+    #header div.last_sort a.glyphicon.sort {
+        width: 25% !important;
+        padding: 3.5% 0.25% 3.5% 0.25% !important;
+        margin: 3.5% 2.5% 0 0 !important;
+    }
+}
+
+/* LIST ELEMENTS */
+.dataElement {
+    display: none;
+    height: 35px;
+    margin: 0.65% 0 0.15% 0;
+    background: #ccf3ff;
+}
+
+.dataElement:hover {
+    border: solid black;
+    border-width: 0 1px 2px 1px;
+    background: darkgrey;
+}
+
+.dataElement div {
+    margin-top: 1%;
+}
+
+@media (min-width: 62em) {
+    .dataElement div {
+        margin-top: 0.75%;
+    }
+}
+
+.dataElement div .glyphicon {
+    margin-top: 2.5%;
+    margin-right: 15%;
+    font-size: 115%;
+    text-decoration: none;
+    color: black;
+}
+
+.dataElement div .glyphicon:hover {
+    border-bottom: 2px solid blue;
+}
+
+/* LIST ELEMENT <--! */
+#viewerOne {
+    margin-top: 1.5%;
+    background: #3B5998;
+    border-radius: 10px;
+}
+
+#viewerOne ul {
+    padding: 5%;
+    list-style: none;
+}
+
+#viewerOne ul li.clearfix :first-child {
+    text-align: right;
+    font-size: 125%;
+    font-weight: bolder;
+    padding: 1% 3.5% 1% 1%;
+}
+
+#viewerOne ul li {
+    margin: 1% 0 1% 0;
+    font-size: 115%;
+    font-weight: bolder;
+    font-family: "Roboto", fantasy;
+}
+
+#viewerOne ul li input {
+    padding: 1%;
+    margin-top: 0.15%;
+    background: lightgrey;
+}
+
+#viewerOne ul li input:focus {
+    background: lightgoldenrodyellow !important;
+}
+
+/* ERROR PAGE */
+#viewerOne .well-lg .error {
+    background: lightgrey;
+    padding: 2.5%;
+    border: 1px solid white;
+    border-radius: 15px;
+    font-weight: bolder;
+    font-family: "Roboto", fantasy;
+    text-align: center;
+}
+
+#viewerOne a.col-xs-offset-5 {
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+}
+
+/* ACTIONS */
+#actions {
+    background: #3B5998;
+    padding: 1% 0 0.5% 0;
+    border-radius: 0 0 10px 10px;
+}
+
+#actions a {
+    color: black;
+    background-color: white;
+    font-size: 105%;
+    font-weight: bolder;
+    padding: 0.5%;
+}
+
+#actions a:hover {
+    color: white;
+    background-color: black;
+}
+

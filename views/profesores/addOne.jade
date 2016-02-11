@@ -1,0 +1,38 @@
+extends ../layout
+
+block content
+    body
+        // NAVBAR LOCATION
+        #navigationMenu.col-xs-11.btn-group-lg.nav.navbar-nav
+            a#home.col-xs-1.btn.glyphicon.glyphicon-home(href="http://localhost:3000/dbSelector")
+            a#logOut.col-xs-1.btn.glyphicon.glyphicon-log-out(type='button')
+            // NAVBAR OF TABLES
+            #tableSelector.col-xs-8.col-xs-offset-2
+                a.col-xs-4.btn.btnTableSelector(href="http://localhost:3000/"+db+"?v=alumnos") Alumnos
+                a.col-xs-4.btn.btnTableSelector(href="http://localhost:3000/"+db+"?v=profesores") Profesores
+                a.col-xs-4.btn.btnTableSelector(href="http://localhost:3000/"+db+"?v=asignaturas") Asignaturas
+        .clearfix
+
+        //ACTIONS
+        #actions.col-xs-10.col-xs-offset-1
+            a.col-xs-3.col-xs-offset-1.btn.action(about="profesores", action="addOne") Añadir
+            a.col-xs-offset-6.col-xs-1.btn.action(href="http://localhost:3000/"+db+"?v=profesores") Atras
+
+        // VIEWER
+        #viewerOne.container.col-xs-8.col-xs-offset-2
+            ul
+                li.clearfix.hidden
+                    input#id(value="")
+                li.clearfix
+                    .col-xs-3 Nombre
+                    input#name.input-lg.col-xs-9(value="")
+                li.clearfix
+                    .col-xs-3 Apellidos
+                    input#apelidos.input-lg.col-xs-9(value="")
+                li.clearfix
+                    .col-xs-3 Email
+                    input#email.input-lg.col-xs-9(value="", type="email")
+                li.clearfix
+                    .col-xs-3 Asignatura
+                    input#asignatura.input-lg.col-xs-9(value="")
+
