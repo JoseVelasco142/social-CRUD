@@ -25,7 +25,7 @@
     border-radius: 10px;
 }
 
-#sendLogIn {
+#sendLogIn, #sendNewUser {
     padding: 2.5%;
     background: black;
     color: white;
@@ -35,7 +35,7 @@
     letter-spacing: 2px;
 }
 
-#sendLogIn:hover {
+#sendLogIn:hover, #sendNewUser:hover {
     background: darkgrey;
     color: black;
 }
@@ -44,6 +44,13 @@
     text-align: center;
 }
 
+#register_back {
+    background: black;
+    color: white;
+    text-align: center;
+    font-weight: bolder;
+    margin-bottom: 2.5%;
+}
 
 /* SOCIAL LOGIN */
 .btnLoginSocial, .btnRegisterSocial, #register_go {
@@ -56,7 +63,11 @@
     letter-spacing: 3px;
 }
 
-.btnLoginSocial:hover , .btnRegisterSocial:hover, #register_go:hover {
+#RL_facebook {
+    margin-top: 10%;
+}
+
+.btnLoginSocial:hover, .btnRegisterSocial:hover, #register_go:hover {
     background: darkgrey;
     color: black;
 }

@@ -1,10 +1,9 @@
 /**
  * Created by root on 31/01/16.
  */
-var express = require('express');
-var router = express.Router();
-var _SQLITE = require('../models/sqliteDB');
-
+var express = require('express'),
+    _SQLITE = require('../CRUD/sqliteDB'),
+    router = express.Router();
 
 // SELECT
 router.get('/', function (req, res, next) {
@@ -12,33 +11,50 @@ router.get('/', function (req, res, next) {
     var key = req.query.k;
     var action = req.query.a;
 
+    if(req.user == undefined)
+        res.redirect("/");
+    if (view == undefined)
+        view = "alumnos";
+
     if (!action) {
         _SQLITE.prototype.selectAll(view, function (data) {
-            res.render(view + '/showAll', {title: 'Todos los ' + view, data: data, db: "sqlite"});
+            res.render(view + '/showAll', {
+                title: 'Todos los ' + view,
+                data: data, db: "sqlite",
+                user: req.user});
         });
     } else {
         switch (action) {
             case "add":
                 res.render(view + '/addOne', {
-                    title: 'Añadir ' + view, db: "sqlite"
+                    title: 'Añadir ' +
+                    view, db: "sqlite",
+                    user: req.user
                 });
                 break;
             case "search":
                 _SQLITE.prototype.search(view, key, function (data) {
                     if (data != null) {
                         if (data.length != 1)
-                            res.render(view + '/showAll', {title: 'Todos los ' + view, data: data, db: "sqlite"});
+                            res.render(view + '/showAll', {
+                                title: 'Todos los ' + view,
+                                data: data,
+                                db: "sqlite",
+                                user: req.user
+                            });
                         else
                             res.render(view + '/showOne', {
                                 title: view + "-> " + data[0].nombre,
                                 data: data[0],
-                                db: "sqlite"
+                                db: "sqlite",
+                                user: req.user
                             });
                     } else {
                         res.render(view + '/showOne', {
-                            title: 'Todos los ' + view,
+                            title: 'Sin ' + view,
                             err: "No se han encontrado datos",
-                            db: "sqlite"
+                            db: "sqlite",
+                            user: req.user
                         });
                     }
                 });
@@ -49,13 +65,15 @@ router.get('/', function (req, res, next) {
                         res.render(view + '/showOne', {
                             title: view + " " + data[0].nombre,
                             data: data[0],
-                            db: "sqlite"
+                            db: "sqlite",
+                            user: req.user
                         });
                     } else {
                         res.render(view + '/showOne', {
-                            title: 'Todos los ' + view,
+                            title: 'Sin ' + view,
                             err: "No se han encontrado datos",
-                            db: "sqlite"
+                            db: "sqlite",
+                            user: req.user
                         });
                     }
                 });
@@ -78,7 +96,7 @@ router.post('/', function (req, res) {
                     break;
                 case "asignaturas":
                     key = data.idAsignatura;
-                    console.log("CNTRL SQLITE LINE 80: "+ key);
+                    console.log("CNTRL SQLITE LINE 80: " + key);
                     break;
             }
             res.send(key + "");

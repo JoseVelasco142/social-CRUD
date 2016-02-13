@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    body
+        // NEW USER
+        #newUser.col-xs-12.hidden
+            .col-xs-12
+                #register_back.col-xs-1.col-xs-offset-11.btn Atrás
+            h1
+                .col-xs-5 REGISTRO NORMAL
+                .col-xs-2 o
+                .col-xs-5 REGISTRO SOCIAL
+            .col-xs-5
+                label.col-xs-12.co-sm-12.col-md-4.col-lg-4(for='newUsername') Nombre
+                input#newUsername.col-xs-12.col-sm-12.col-md-8.col-lg-8.input-lg(type='text', name='newUsername', placeholder='Nombre', required='', autofocus='')
+                label.col-xs-12.co-sm-12.col-md-4.col-lg-4(for='newEmail') Email
+                input#newEmail.col-xs-12.col-sm-12.col-md-8.col-lg-8.input-lg(type='email', name='newEmail', placeholder='@', required='', autofocus='')
+                label.col-xs-12.co-sm-12.col-md-4.col-lg-4(for='newPassword') Password
+                input#newPassword.col-xs-12.col-sm-12.col-md-8.col-lg-8.input-lg(type='password', name='newPassword', placeholder='contraseña', required='', autofocus='')
+                button#sendNewUser.col-xs-8.col-xs-offset-4.btn.btn-lg.btn-default(type='button') Regístrate
+            .col-xs-2
+            .col-xs-5
+                button#RL_facebook.col-xs-12.btn.btn-lg.btn-default.btnRegisterSocial(type='button') Facebook &nbsp;
+                    img(src="/images/facebook_social.png")
+                button#RL_twitter.col-xs-12.btn.btn-lg.btn-default.btnRegisterSocial(type='button') Twitter &nbsp;&nbsp;&nbsp;
+                    img(src="/images/twitter_social.png")

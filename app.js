@@ -1,27 +1,31 @@
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var session = require("express-session");
+var express = require('express'),
+    path = require('path'),
+    logger = require('morgan'),
+    cookieParser = require('cookie-parser'),
+    bodyParser = require('body-parser'),
+    session = require("express-session"),
+    passport = require('passport'),
+    initPassport = require('./passport/init');
 
-var routes = require('./routes/index');
-var login = require('./routes/login');
-var users = require('./routes/users');
-var dbselector = require('./routes/index');
-var sqlite = require('./routes/sqlite');
-var mongo = require('./routes/mongo');
+var mongoose = require('mongoose');
+    mongoose.connect('mongodb://localhost/users');
 
 var app = express();
 
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-// SESSION
+
+// SESSION && PASSPORT
 app.use(session({
+    secret: 'keyboard cat',
     resave: true,
-    saveUninitialized: true,
-    secret: 'BLACK-CAT'
+    saveUninitialized: true
 }));
+initPassport(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -30,13 +34,16 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var routes = require('./routes/index')(passport),
+/*    login = require('./routes/local_login'),*/
+    sqlite = require('./routes/sqlite'),
+    mongo = require('./routes/mongo');
+
+
 app.use('/', routes);
-app.use('/users', users);
-app.use('/login', login);
-app.use('/dbselector',dbselector);
+/*app.use('/login_local', login);*/
 app.use('/sqlite',sqlite);
 app.use('/mongo',mongo);
-
 
 
 // catch 404 and forward to error handler

@@ -5,6 +5,7 @@
  */
 
 var app = require('../app');
+var debug = require('debug')('passport-mongo');
 var debug = require('debug')('dataBase:server');
 var http = require('http');
 

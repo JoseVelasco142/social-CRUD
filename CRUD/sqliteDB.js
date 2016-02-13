@@ -3,6 +3,7 @@
  */
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('colegio.db');
+var data = require('./colegio_sqlite');
 
 var _SQLITE = {
     prototype: {
@@ -167,44 +168,5 @@ var _SQLITE = {
         }
     }
 };
-
-function createDb() {
-    db.serialize(function () {
-        db.run("CREATE TABLE IF NOT EXISTS alumnos (" +
-            "idAlumno INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "nombre varchar(20), " +
-            "apellidos varchar(50), " +
-            "email varchar(50), " +
-            "asignaturas varchar(200))");
-        db.run("CREATE TABLE IF NOT EXISTS asignaturas (" +
-            "idAsignatura INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "nombre varchar(20), " +
-            "descripcion varchar(50), " +
-            "profesor INT, " +
-            "FOREING KEY profesor REFERENCES profesores(idProfesor))");
-        db.run("CREATE TABLE IF NOT EXISTS profesores (" +
-            "idProfesor INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "nombre varchar(20), " +
-            "apellidos varchar(50), " +
-            "email varchar(50), " +
-            "asignatura varchar(20))");
-
-        db.run("INSERT INTO alumnos(nombre, apellidos, email, asignaturas)              VALUES ('jose', 'velasco', 'jose@jose.com', " +
-            "'sistemas, servicios, base de datos, aplicaciones, seguridad, empresa')");
-        db.run("INSERT INTO alumnos(nombre, apellidos, email, asignaturas)              VALUES ('diego', 'pastor', 'diego@diego.com', " +
-            "'sistemas, servicios, base de datos, aplicaciones, seguridad, empresa')");
-        db.run("INSERT INTO alumnos(nombre, apellidos, email, asignaturas)              VALUES ('laura', 'carmona', 'laura@laura.com', " +
-            "'sistemas, servicios, base de datos, aplicaciones, seguridad, empresa')");
-
-        db.run("INSERT INTO profesores(nombre, apellidos, email, asignatura) VALUES('Susana','Lopez','sulogo@gmail.com','servicios')");
-        db.run("INSERT INTO profesores(nombre, apellidos, email, asignatura) VALUES('Raul','Jimenez','rajibe@gmail.com','sistemas')");
-        db.run("INSERT INTO profesores(nombre, apellidos, email, asignatura) VALUES('Luisa','Oliver','economia.iliberis@gmail.com','empresa')");
-
-        db.run("INSERT INTO asignaturas(nombre, descripcion, profesor)           VALUES('Servicios','servicios description',1)");
-        db.run("INSERT INTO asignaturas(nombre, descripcion, profesor)           VALUES('Sistemas','sistemas description',2)");
-        db.run("INSERT INTO asignaturas(nombre, descripcion, profesor)           VALUES('Sistemas','sitemas description',3)");
-    });
-}
-//createDb();
 
 module.exports = _SQLITE;

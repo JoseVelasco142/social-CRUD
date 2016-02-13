@@ -4,53 +4,8 @@
 var DBNODE = DBNODE || {};
 
 DBNODE.prototype = {
-    openRegister: function() {
-        $('#logIn').toggleClass('hidden');
-        $('#newUser').toggleClass('hidden');
-    },
-    closeRegister: function() {
-        $('#newUser').toggleClass('hidden');
-        $('#logIn').toggleClass('hidden');
-    },
-    logIn: function () {
-        $.ajax({
-            url: 'http://localhost:3000/login',
-            type: 'POST',
-            data: {
-                'login': true,
-                'mail': $('#logInEmail').val(),
-                'password': $('#logInPassword').val()
-            }
-        }).done(function (response) {
-            console.log(response);
-            location.href = response;
-        })
-    },
-    logInSocial: function () {
-
-    },
-    newUserNormal: function () {
-
-    },
-    newUserSocial: function () {
-
-    },
-    logOut: function () {
-        $.ajax({
-            url: 'http://localhost:3000/login',
-            type: 'POST',
-            data: {
-                'logOut': true
-            }
-        }).done(function (response) {
-            location.href = response;
-        })
-    },
-    useSqlite: function () {
-        window.location.href = 'http://localhost:3000/sqlite?v=alumnos';
-    },
-    useMongoDB: function () {
-        window.location.href = 'http://localhost:3000/mongo?v=alumnos';
+    selectDb: function(db){
+        window.location.href = 'http://localhost:3000/dbSwitch?db='+db;
     },
     actions: function (action, table, id) {
         var data = null;
@@ -165,10 +120,9 @@ DBNODE.prototype = {
                     $.ajax({
                         url: "http://localhost:3000" + db + "?v=" + table + "&k=" + id + "&a=" + action,
                         type: 'DELETE'
-                    }).done(function (ok) {
-                        if (ok) {
+                    }).done(function (data) {
+                        if(!alert(data + " eliminado correctamente"))
                             location.href = "http://localhost:3000" + db + "?v=" + table;
-                        }
                     });
                 }
                 break;
@@ -185,56 +139,35 @@ DBNODE.prototype = {
 };
 
 $(document).ready(function () {
-    setTimeout(function () {
-        $('#dataViewer').mixItUp({
-            animation: {
-                effects: 'scale translateY(-600px) translateZ(-600px) rotateX(-180deg)',
-                duration: 1000,
-                easing: 'cubic-bezier(0.175, 0.90, 0.32, 1.05)'
-            },
-            load: {
-                page: 1
-            },
-            control: {
-                enable: true,
-                toggleFilterButtons: true,
-                activeClass: 'on'
-            },
-            pagination: {
-                limit: 6,
-                generatePagers: true,
-                loop: true,
-                pagerClass: 'btn btn-default'
-            }
-        });
-    }, 1250);
-
-    $('#sendLogIn').click(function () {
-        DBNODE.prototype.logIn();
-    });
-    $('#btnLoginSocial').click(function () {
-        DBNODE.prototype.logInSocial();
-    });
-    $('#btnNewSocial').click(function () {
-        DBNODE.prototype.newUserSocial();
-    });
-    $('#register_go').click(function(){
-        DBNODE.prototype.openRegister();
-    });
-    $('#register_back').click(function(){
-        DBNODE.prototype.closeRegister();
-    });
-    $('#logOut').click(function () {
-        DBNODE.prototype.logOut();
-    });
-    $('#sqLite').click(function () {
-        DBNODE.prototype.useSqlite();
-    });
-    $('#Mongo').click(function () {
-        DBNODE.prototype.useMongoDB();
+    if (location.pathname == "/sqlite" || "/mongo") {
+        setTimeout(function () {
+            $('#dataViewer').mixItUp({
+                animation: {
+                    effects: 'scale translateY(-600px) translateZ(-600px) rotateX(-180deg)',
+                    duration: 1000,
+                    easing: 'cubic-bezier(0.175, 0.90, 0.32, 1.05)'
+                },
+                load: {
+                    page: 1
+                },
+                control: {
+                    enable: true,
+                    toggleFilterButtons: true,
+                    activeClass: 'on'
+                },
+                pagination: {
+                    limit: 6,
+                    generatePagers: true,
+                    loop: true,
+                    pagerClass: 'btn btn-default'
+                }
+            });
+        }, 1250);
+    }
+    $('.dbType').click(function(){
+       DBNODE.prototype.selectDb($(this).attr('about'));
     });
     $('.action').click(function () {
         DBNODE.prototype.actions($(this).attr('action'), $(this).attr('about'), $(this).attr('accesskey'));
     });
-
 });

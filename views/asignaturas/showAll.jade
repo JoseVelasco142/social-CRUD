@@ -5,7 +5,7 @@ block content
     body
         // NAVBAR LOCATION
         #navigationMenu.col-xs-11.btn-group-lg.nav.navbar-nav
-            a#home.col-xs-1.btn.glyphicon.glyphicon-home(href="http://localhost:3000/dbSelector")
+            a#home.col-xs-1.btn.glyphicon.glyphicon-home(href="http://localhost:3000/dbSwitch")
             a#logOut.col-xs-1.btn.glyphicon.glyphicon-log-out(type='button')
             // NAVBAR OF TABLES
             #tableSelector.col-xs-8.col-xs-offset-2
@@ -52,3 +52,8 @@ block content
                             a.glyphicon.glyphicon-eye-open.action(accesskey=asignatura.idAsignatura, about="asignaturas", action="show")
                             a.glyphicon.glyphicon-trash.action(accesskey=asignatura.idAsignatura, about="asignaturas", action="delete")
 
+    footer
+        .navbar-fixed-bottom.navbar-inverse
+            .col-lg-6.col-lg-offset-6.col-md-6.col-md-offset-6.col-sm-12.col-xs-12
+                span.col-xs-6 Sesión iniciada como:
+                span=user.facebook.email
