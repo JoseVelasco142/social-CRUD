@@ -42,9 +42,12 @@ block view
         .navbar-fixed-bottom.navbar-inverse
             .col-lg-6.col-lg-offset-6.col-md-6.col-md-offset-6.col-sm-12.col-xs-12
                 span.col-xs-6 Sesión iniciada como:
-                if (user.facebook.email != null)
-                    span.username=user.facebook.email
-                if (user.twitter.username != null)
-                    span.username=user.twitter.username
-                if (user.email != null)
-                    span.username=user.email
+                if(user)
+                    if(user.facebook)
+                        if (user.facebook.email != null)
+                            span.username=user.facebook.email
+                    if(user.twitter)
+                        if (user.twitter.username != null)
+                            span.username=user.twitter.username
+                    if (user.email != null)
+                        span.username=user.email

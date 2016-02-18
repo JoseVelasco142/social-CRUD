@@ -4,8 +4,6 @@ var express = require('express'),
     register = require('../passport/register'),
     router = express.Router();
 
-    var fakeUser = null;
-
 router.post('/login', function(req, res) {
     local(req.body.email, req.body.password, function(valid, user){
         console.log("VALID"+valid+" user"+user);

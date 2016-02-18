@@ -10,9 +10,7 @@ router.get('/', function (req, res, next) {
     var view = req.query.v;
     var key = req.query.k;
     var action = req.query.a;
-
-    if(req.user == undefined)
-        res.redirect("/");
+    
     if (view == undefined)
         view = "alumnos";
 
