@@ -13,9 +13,11 @@ DBNODE.prototype = {
                 'password': password
             }
         }).done(function (response) {
+            var loginError =  $('#loginError');
             if (response != null) {
                 if (!response) {
-                    $('#loginForm').prepend(
+                    loginError.empty();
+                    loginError.append(
                         '<div class="alert-danger col-lg-7 col-lg-offset-4 col-md-7 col-md-offset-4 col-sm-10  col-xs-10">' +
                         'Email o contrase&ntilde;a incorrecta' +
                         '</div>'
@@ -23,7 +25,8 @@ DBNODE.prototype = {
                 } else
                     location.href = response;
             } else {
-                $('#loginForm').prepend(
+                loginError.empty();
+                loginError.append(
                     '<div class="alert-danger col-lg-7 col-lg-offset-4 col-md-7 col-md-offset-4 col-sm-10  col-xs-10">' +
                     'Ese email aun no esta registrado' +
                     '</div>'

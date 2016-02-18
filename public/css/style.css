@@ -177,29 +177,6 @@
     background: #3B5998;
     padding: 0;
     border-radius: 0 0 10px 10px;
-    margin-top: 3%;
-}
-
-@media (max-width: 84em) {
-    #pager_new {
-        margin-top: 3.5% !important;
-    }
-}
-
-@media (max-width: 62em) {
-    #pager_new {
-        margin-top: 4% !important;
-    }
-}
-
-@media (max-width: 48em) {
-    #pager_new {
-        margin-top: 4.75% !important;
-    }
-}
-
-#actions {
-    margin-top: 4%;
 }
 
 #pager_new .pager-list {

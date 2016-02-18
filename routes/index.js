@@ -7,13 +7,12 @@ var express = require('express'),
     var fakeUser = null;
 
 router.post('/login', function(req, res) {
-    var email  = req.body.email;
-    var password = req.body.password;
-    local(email, password, function(valid, user){
+    local(req.body.email, req.body.password, function(valid, user){
+        console.log("VALID"+valid+" user"+user);
         if(valid != null){
             if(valid){
-                fakeUser = user;
-                res.send("http://localhost:3000/fakeSwitch");
+                req.user = user;
+                res.send("http://localhost:3000/dbSwitch");
             }
             else
                 res.send(valid);
@@ -34,10 +33,14 @@ router.post('/register', function(req, res) {
 router.get('/register', function(req, res) {
     res.render('register', {title: "Nuevo usuario"});
 });
-router.get('/fakeSwitch', function(req, res){
-    if(fakeUser == undefined) res.redirect("/");
+router.get('/dbSwitch', function(req, res){
     if(req.query.db == null){
-        res.render('dbSwitch', { user: fakeUser, link: "fakeSwitch" });
+        res.render('dbSwitch', { user: req.user });
+    } else {
+        if(req.query.db == "sqlite")
+            res.redirect("http://localhost:3000/sqlite");
+        else
+            res.redirect("http://localhost:3000/mongo");
     }
 });
 
@@ -73,24 +76,7 @@ module.exports = function(passport){
         })
     );
 
-    router.get('/dbSwitch', isAuthenticated, function(req, res){
-        if(req.query.db == null){
-            res.render('dbSwitch', { user: req.user });
-        } else {
-            if(req.query.db == "sqlite")
-                res.redirect("http://localhost:3000/sqlite");
-            else
-                res.redirect("http://localhost:3000/mongo");
-        }
-    });
-
     return router;
-};
-
-var isAuthenticated = function (req, res, next) {
-   if (req.isAuthenticated())
-        return next();
-    res.redirect('/');
 };
 
 

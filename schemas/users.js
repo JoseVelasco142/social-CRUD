@@ -6,12 +6,6 @@ var passport = require('passport'),
 
 
 module.exports= mongoose.model('users', {
-    local: {
-        id: String,
-        username: String,
-        password: String,
-        email: String
-    },
     facebook: {
         id: String,
         access_token: String,
