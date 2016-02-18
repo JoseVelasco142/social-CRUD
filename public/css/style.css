@@ -1,4 +1,15 @@
-/* Login  */
+@media (min-width: 62em) {
+    html, body {
+        overflow-y: hidden;
+    }
+}
+
+@media (max-width: 62em) {
+    html, body {
+        font-size: 80% !important;
+    }
+}
+
 #newUser, #logIn {
     padding: 5%;
     margin-top: 5%;
@@ -7,21 +18,50 @@
     font-family: "Roboto", fantasy;
 }
 
-#newUser h1, #logIn h1 {
+/* Register */
+#newUser h1 {
     text-align: center;
-    font-size: 225%;
+    font-size: 200%;
     font-weight: bold;
-    margin-bottom: 10%;
+    margin-bottom: 2%;
 }
 
-#newUser label, #logIn label {
+#newUser label {
     margin-bottom: 5%;
     font-size: 150%;
     line-height: 35px;
 }
 
-#newUser input, #logIn input {
+#newUser input {
     margin-bottom: 5%;
+    border-radius: 10px;
+}
+
+/* Login  */
+
+#logIn {
+    padding: 1%;
+    margin-top: 3%;
+    background: #D3D3D3 none repeat scroll 0% 0%;
+    height: 450px;
+    font-family: "Roboto", fantasy;
+}
+
+#logIn h1 {
+    text-align: center;
+    font-size: 225%;
+    font-weight: bold;
+    margin-bottom: 2%;
+}
+
+#logIn label {
+    margin-bottom: 2.5%;
+    font-size: 150%;
+    line-height: 35px;
+}
+
+#logIn input {
+    margin-bottom: 2.5%;
     border-radius: 10px;
 }
 
@@ -53,27 +93,23 @@
 }
 
 /* SOCIAL LOGIN */
-.btnLoginSocial, .btnRegisterSocial, #register_go {
-    padding: 0;
-    background: black;
-    color: white;
+.btnLoginSocial, #btnRegister {
+    color: black;
     font-weight: bolder;
     font-family: "Roboto", fantasy;
     margin-bottom: 10%;
     letter-spacing: 3px;
+    width: 80%;
+    background: transparent;
+    padding: 0;
 }
 
 #RL_facebook {
     margin-top: 10%;
 }
 
-.btnLoginSocial:hover, .btnRegisterSocial:hover, #register_go:hover {
-    background: darkgrey;
-    color: black;
-}
-
-.btnLoginSocial img, .btnRegisterSocial img {
-    width: 12.5%;
+.btnLoginSocial img, #btnRegister img {
+    width: 70%;
     height: auto;
 }
 
@@ -108,6 +144,16 @@
     border-bottom: 5px solid black;
 }
 
+#dbSwitch {
+    margin-top: 3%;
+}
+
+@media (max-width: 62em) {
+    #dbSwitch {
+        margin-top: 0;
+    }
+}
+
 /* VIEWS */
 /* TABLE SELECTOR */
 #tableSelector {
@@ -126,10 +172,34 @@
 }
 
 /* PAGINATION // NEW BUTTON*/
+
 #pager_new {
     background: #3B5998;
     padding: 0;
     border-radius: 0 0 10px 10px;
+    margin-top: 3%;
+}
+
+@media (max-width: 84em) {
+    #pager_new {
+        margin-top: 3.5% !important;
+    }
+}
+
+@media (max-width: 62em) {
+    #pager_new {
+        margin-top: 4% !important;
+    }
+}
+
+@media (max-width: 48em) {
+    #pager_new {
+        margin-top: 4.75% !important;
+    }
+}
+
+#actions {
+    margin-top: 4%;
 }
 
 #pager_new .pager-list {
@@ -159,6 +229,7 @@
 /* VISOR */
 #dataViewer {
     margin-top: 1.5%;
+    margin-bottom: 5%;
 }
 
 /* SEARCH BAR */
@@ -303,6 +374,19 @@
     background: lightgrey;
 }
 
+@media (max-width: 62em) {
+    #viewerOne ul li input {
+        font-size: 95%;
+        padding: 0.5%;
+        height: 25px;
+    }
+
+    #viewerOne ul li {
+        font-size: 95%;
+        line-height: 15px;
+    }
+}
+
 #viewerOne ul li input:focus {
     background: lightgoldenrodyellow !important;
 }
@@ -341,5 +425,17 @@
 #actions a:hover {
     color: white;
     background-color: black;
+}
+
+/* FOOTER */
+footer {
+    font-size: 100%;
+    font-family: "Roboto", fantasy;
+    color: white;
+}
+
+.username {
+    font-weight: bolder;
+    font-size: 115%;
 }
 

@@ -4,7 +4,8 @@
 
 var express = require('express'),
     router = express.Router(),
-    _MONGODB = require('../CRUD/mongoDB');
+    _MONGODB = require('../models/mongoDB');
+
 
 // SELECT
 

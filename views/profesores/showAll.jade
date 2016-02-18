@@ -1,59 +1,52 @@
 //Created by root on 31/01/16.
-extends ../layout
+extends ../navbar
+block view
+    // PAGER LIST AND ADD NEW ELEMENT BUTTON
+    #pager_new.col-xs-10.col-xs-offset-1
+        .col-xs-7.col-xs-offset-1.pager-list
+        a.newElement.col-xs-3.col-xs-offset-1.btn.btnTableSelector(href="http://localhost:3000/" + db + "?v=profesores&a=add") Nuevo profesor
 
-block content
-    body
-        // NAVBAR LOCATION
-        #navigationMenu.col-xs-11.btn-group-lg.nav.navbar-nav
-            a#home.col-xs-1.btn.glyphicon.glyphicon-home(href="http://localhost:3000/dbSwitch")
-            a#logOut.col-xs-1.btn.glyphicon.glyphicon-log-out(type='button')
-            // NAVBAR OF TABLES
-            #tableSelector.col-xs-8.col-xs-offset-2
-                a.col-xs-4.btn.btnTableSelector(href="http://localhost:3000/" + db + "?v=alumnos") Alumnos
-                a.col-xs-4.btn.btnTableSelector(href="http://localhost:3000/" + db + "?v=profesores") Profesores
-                a.col-xs-4.btn.btnTableSelector(href="http://localhost:3000/" + db + "?v=asignaturas") Asignaturas
-        .clearfix
-        // PAGER LIST AND ADD NEW ELEMENT BUTTON
-        #pager_new.col-xs-10.col-xs-offset-1
-            .col-xs-7.col-xs-offset-1.pager-list
-            a.newElement.col-xs-3.col-xs-offset-1.btn.btnTableSelector(href="http://localhost:3000/" + db + "?v=profesores&a=add") Nuevo profesor
-
-        // HEADER AND DATA WITH ACTIONS
-        #dataViewer.col-xs-10.col-xs-offset-1
-            #header.col-xs-12
-                a.col-lg-1.col-md-1.hidden-sm.hidden-xs Nombre
-                .col-xs-3.col-sm-3.col-md-2.col-lg-2
-                    a.col-xs-6.btn.glyphicon.glyphicon-sort-by-alphabet.sort(data-sort="name:asc")
-                    a.col-xs-6.btn.glyphicon.glyphicon-sort-by-alphabet-alt.sort(data-sort="name:desc")
-                a.col-lg-1.col-md-1.hidden-sm.hidden-xs Apellidos
-                .col-xs-3.col-sm-3.col-md-2.col-lg-2
-                    a.col-xs-6.btn.glyphicon.glyphicon-sort-by-alphabet.sort(data-sort="apellido:asc")
-                    a.col-xs-6.btn.glyphicon.glyphicon-sort-by-alphabet-alt.sort(data-sort="apellido:desc")
-                a.col-lg-1.col-md-1.hidden-sm.hidden-xs Email
-                .col-xs-2.last_sort
-                    a.col-xs-6.btn.glyphicon.glyphicon-sort-by-alphabet.sort(data-sort="mail:asc")
-                    a.col-xs-6.btn.glyphicon.glyphicon-sort-by-alphabet-alt.sort(data-sort="mail:desc")
-                #searchBar.col-lg-3.col-md-3.col-sm-4.col-xs-4
-                    input#searchBox.col-xs-8.input-md(type="text", about="profesores")
-                    a#searchButton.btn.glyphicon.glyphicon-search.action(about="profesores", action="search")
+    // HEADER AND DATA WITH ACTIONS
+    #dataViewer.col-xs-10.col-xs-offset-1
+        #header.col-xs-12
+            a.col-lg-1.col-md-1.hidden-sm.hidden-xs Nombre
+            .col-xs-3.col-sm-3.col-md-2.col-lg-2
+                a.col-xs-6.btn.glyphicon.glyphicon-sort-by-alphabet.sort(data-sort="name:asc")
+                a.col-xs-6.btn.glyphicon.glyphicon-sort-by-alphabet-alt.sort(data-sort="name:desc")
+            a.col-lg-1.col-md-1.hidden-sm.hidden-xs Apellidos
+            .col-xs-3.col-sm-3.col-md-2.col-lg-2
+                a.col-xs-6.btn.glyphicon.glyphicon-sort-by-alphabet.sort(data-sort="apellido:asc")
+                a.col-xs-6.btn.glyphicon.glyphicon-sort-by-alphabet-alt.sort(data-sort="apellido:desc")
+            a.col-lg-1.col-md-1.hidden-sm.hidden-xs Email
+            .col-xs-2.last_sort
+                a.col-xs-6.btn.glyphicon.glyphicon-sort-by-alphabet.sort(data-sort="mail:asc")
+                a.col-xs-6.btn.glyphicon.glyphicon-sort-by-alphabet-alt.sort(data-sort="mail:desc")
+            #searchBar.col-lg-3.col-md-3.col-sm-4.col-xs-4
+                input#searchBox.col-xs-8.input-md(type="text", about="profesores")
+                a#searchButton.btn.glyphicon.glyphicon-search.action(about="profesores", action="search")
 
 
-            each profesor in data
-                .col-xs-12.dataElement.mix(data-name=profesor.nombre, data-apellido=profesor.apellidos, data-mail=profesor.email)
-                    .col-xs-3= profesor.nombre
-                    .col-xs-3= profesor.apellidos
-                    .col-xs-4= profesor.email
-                    .col-xs-2
+        each profesor in data
+            .col-xs-12.dataElement.mix(data-name=profesor.nombre, data-apellido=profesor.apellidos, data-mail=profesor.email)
+                .col-xs-3= profesor.nombre
+                .col-xs-3= profesor.apellidos
+                .col-xs-4= profesor.email
+                .col-xs-2
 
-                        if(db == "mongo")
-                            a.glyphicon.glyphicon-eye-open.action(accesskey=profesor._id, about="profesores", action="show")
-                            a.glyphicon.glyphicon-trash.action(accesskey=profesor._id, about="profesores", action="delete")
-                        else
-                            a.glyphicon.glyphicon-eye-open.action(accesskey=profesor.idProfesor, about="profesores", action="show")
-                            a.glyphicon.glyphicon-trash.action(accesskey=profesor.idProfesor, about="profesores", action="delete")
+                    if(db == "mongo")
+                        a.glyphicon.glyphicon-eye-open.action(accesskey=profesor._id, about="profesores", action="show")
+                        a.glyphicon.glyphicon-trash.action(accesskey=profesor._id, about="profesores", action="delete")
+                    else
+                        a.glyphicon.glyphicon-eye-open.action(accesskey=profesor.idProfesor, about="profesores", action="show")
+                        a.glyphicon.glyphicon-trash.action(accesskey=profesor.idProfesor, about="profesores", action="delete")
 
     footer
         .navbar-fixed-bottom.navbar-inverse
             .col-lg-6.col-lg-offset-6.col-md-6.col-md-offset-6.col-sm-12.col-xs-12
                 span.col-xs-6 Sesión iniciada como:
-                span=user.facebook.email
+                if (user.facebook.email != null)
+                    span.username=user.facebook.email
+                if (user.twitter.username != null)
+                    span.username=user.twitter.username
+                if (user.email != null)
+                    span.username=user.email

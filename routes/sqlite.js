@@ -2,7 +2,7 @@
  * Created by root on 31/01/16.
  */
 var express = require('express'),
-    _SQLITE = require('../CRUD/sqliteDB'),
+    _SQLITE = require('../models/sqliteDB'),
     router = express.Router();
 
 // SELECT

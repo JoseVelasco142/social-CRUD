@@ -1,35 +1,53 @@
 var express = require('express'),
     passport = require('passport'),
+    local = require('../passport/local'),
+    register = require('../passport/register'),
     router = express.Router();
 
-var isAuthenticated = function (req, res, next) {
-    if (req.isAuthenticated())
-        return next();
-    res.redirect('/');
-};
+    var fakeUser = null;
+
+router.post('/login', function(req, res) {
+    var email  = req.body.email;
+    var password = req.body.password;
+    local(email, password, function(valid, user){
+        if(valid != null){
+            if(valid){
+                fakeUser = user;
+                res.send("http://localhost:3000/fakeSwitch");
+            }
+            else
+                res.send(valid);
+        } else {
+            res.send(null);
+        }
+    });
+});
+router.post('/register', function(req, res) {
+    register(req.body, function(valid) {
+        if(!valid){
+            res.send(valid);
+        } else{
+            res.send(true);
+        }
+    });
+});
+router.get('/register', function(req, res) {
+    res.render('register', {title: "Nuevo usuario"});
+});
+router.get('/fakeSwitch', function(req, res){
+    if(fakeUser == undefined) res.redirect("/");
+    if(req.query.db == null){
+        res.render('dbSwitch', { user: fakeUser, link: "fakeSwitch" });
+    }
+});
 
 module.exports = function(passport){
     router.get('/', function(req, res) {
         res.render('index', { title: "dbNode" });
     });
 
-    router.post('/login', passport.authenticate('login', {
-        successRedirect: '/home',
-        failureRedirect: '/',
-        failureFlash : true
-    }));
-
-    router.get('/signup', function(req, res){
-        res.render('register',{message: req.flash('message')});
-    });
-
-    router.post('/signup', passport.authenticate('signup', {
-        successRedirect: '/dbSwitch',
-        failureRedirect: '/signup',
-        failureFlash : true
-    }));
-
     router.get('/signout', function(req, res) {
+        fakeUser = null;
         req.logout();
         res.redirect('/');
     });
@@ -50,14 +68,10 @@ module.exports = function(passport){
 
     router.get('/login/twitter/callback',
         passport.authenticate('twitter', {
-            successRedirect : '/twitter',
+            successRedirect : '/dbSwitch',
             failureRedirect : '/'
         })
     );
-
-    router.get('/twitter', isAuthenticated, function(req, res){
-        res.render('twitter', { user: req.user });
-    });
 
     router.get('/dbSwitch', isAuthenticated, function(req, res){
         if(req.query.db == null){
@@ -67,20 +81,16 @@ module.exports = function(passport){
                 res.redirect("http://localhost:3000/sqlite");
             else
                 res.redirect("http://localhost:3000/mongo");
-
-            /*switch (req.query.db) {
-                case "sqlite":
-                    res.redirect("http://localhost:3000/sqlite");
-                    break;
-                case "mongo":
-                    res.redirect("http://localhost:3000/mongo");
-                    break;
-            }*/
-
         }
     });
 
     return router;
+};
+
+var isAuthenticated = function (req, res, next) {
+   if (req.isAuthenticated())
+        return next();
+    res.redirect('/');
 };
 
 

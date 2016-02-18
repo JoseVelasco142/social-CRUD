@@ -2,7 +2,7 @@
  * Created by root on 7/02/16.
  */
 var mongoose = require('mongoose');
-var colegio = require("../models/colegio");
+var colegio = require("../schemas/colegio");
 mongoose.createConnection('mongodb://localhost/colegio');
 var _MONGODB = {
     prototype: {

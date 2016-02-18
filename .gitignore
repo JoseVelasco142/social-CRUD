@@ -1,4 +1,6 @@
 colegio.db
+npm-debug.log
 .idea/
 passport/appsData/facebook.js
+passport/appsData/twitter.js
 node_modules/

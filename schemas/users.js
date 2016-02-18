@@ -1,8 +1,9 @@
 /**
  * Created by root on 11/02/16.
  */
+var passport = require('passport'),
+    mongoose = require('mongoose');
 
-var mongoose = require('mongoose');
 
 module.exports= mongoose.model('users', {
     local: {
@@ -20,10 +21,9 @@ module.exports= mongoose.model('users', {
     },
     twitter: {
         id: String,
-        token: String,
-        username: String,
-        displayName: String,
-        lastStatus: String
+        nombre: String,
+        password: String,
+        email: String
     }
 });
 

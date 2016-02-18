@@ -1,59 +1,51 @@
 // Created by root on 31/01/16.
-extends ../layout
+extends ../navbar
+block view
+    //ACTIONS
+    if(data)
+           #actions.col-xs-10.col-xs-offset-1
+               a.col-xs-2.col-xs-offset-1.btn.btnTableSelector.newElement(href="http://localhost:3000/"+db+"?v=alumnos&a=add") Nuevo
+               a.col-xs-2.col-xs-offset-1.btn.action(action="edit") Editar
+               if(db == "mongo")
+                   a.col-xs-2.col-xs-offset-1.btn.hidden.action(accesskey=data._id, about="alumnos", action="update") Guardar
+                   a.col-xs-2.btn.action(accesskey=data._id, about="alumnos", action="delete") Eliminar
+               else
+                   a.col-xs-2.col-xs-offset-1.btn.hidden.action(accesskey=data.idAlumno, about="alumnos", action="update") Guardar
+                   a.col-xs-2.btn.action(accesskey=data.idAlumno, about="alumnos", action="delete") Eliminar
+               a.col-xs-offset-1.col-xs-2.btn(href="http://localhost:3000/"+db+"?v=alumnos") atras
 
-block content
-    body
-        // NAVBAR LOCATION
-        #navigationMenu.col-xs-11.btn-group-lg.nav.navbar-nav
-          a#home.col-xs-1.btn.glyphicon.glyphicon-home(href="http://localhost:3000/dbSwitch")
-          a#logOut.col-xs-1.btn.glyphicon.glyphicon-log-out(type='button')
-          // NAVBAR OF TABLES
-          #tableSelector.col-xs-8.col-xs-offset-2
-              a.col-xs-4.btn.btnTableSelector(href="http://localhost:3000/"+db+"?v=alumnos") Alumnos
-              a.col-xs-4.btn.btnTableSelector(href="http://localhost:3000/"+db+"?v=profesores") Profesores
-              a.col-xs-4.btn.btnTableSelector(href="http://localhost:3000/"+db+"?v=asignaturas") Asignaturas
-          .clearfix
-
-        //ACTIONS
+    // VIEWER
+    #viewerOne.container.col-xs-8.col-xs-offset-2
         if(data)
-               #actions.col-xs-10.col-xs-offset-1
-                   a.col-xs-2.col-xs-offset-1.btn.btnTableSelector.newElement(href="http://localhost:3000/"+db+"?v=alumnos&a=add") Nuevo
-                   a.col-xs-2.col-xs-offset-1.btn.action(action="edit") Editar
-                   if(db == "mongo")
-                       a.col-xs-2.col-xs-offset-1.btn.hidden.action(accesskey=data._id, about="alumnos", action="update") Guardar
-                       a.col-xs-2.btn.action(accesskey=data._id, about="alumnos", action="delete") Eliminar
-                   else
-                       a.col-xs-2.col-xs-offset-1.btn.hidden.action(accesskey=data.idAlumno, about="alumnos", action="update") Guardar
-                       a.col-xs-2.btn.action(accesskey=data.idAlumno, about="alumnos", action="delete") Eliminar
-                   a.col-xs-offset-1.col-xs-2.btn(href="http://localhost:3000/"+db+"?v=alumnos") atras
-
-        // VIEWER
-        #viewerOne.container.col-xs-8.col-xs-offset-2
-            if(data)
-                ul
-                    li.clearfix.hidden
-                        if(db == "mongo")
-                            input#id.data(value=data._id, disable)
-                        else
-                            input#id.data(value=data.idAlumno, disable)
-                    li.clearfix
-                        .col-xs-3 Nombre
-                        input#name.input-lg.col-xs-9.data(value=data.nombre, disabled)
-                    li.clearfix
-                        .col-xs-3 Apellidos
-                        input#apelidos.input-lg.col-xs-9.data(value=data.apellidos, disabled)
-                    li.clearfix
-                        .col-xs-3 Email
-                        input#email.input-lg.col-xs-9.data(value=data.email, disabled)
-                    li.clearfix
-                        .col-xs-3 Asignaturas
-                        input#asignaturas.input-lg.col-xs-9.data(value=data.asignaturas, disabled)
-            else
-                .well-lg
-                    .col-xs-10.col-xs-offset-1.error= err
-                a.col-xs-offset-5.col-xs-2.btn.btn-default(href="http://localhost:3000/" + db + "?v=alumnos") Atrás
+            ul
+                li.clearfix.hidden
+                    if(db == "mongo")
+                        input#id.data(value=data._id, disable)
+                    else
+                        input#id.data(value=data.idAlumno, disable)
+                li.clearfix
+                    .col-xs-3 Nombre
+                    input#name.input-lg.col-xs-9.data(value=data.nombre, disabled)
+                li.clearfix
+                    .col-xs-3 Apellidos
+                    input#apelidos.input-lg.col-xs-9.data(value=data.apellidos, disabled)
+                li.clearfix
+                    .col-xs-3 Email
+                    input#email.input-lg.col-xs-9.data(value=data.email, disabled)
+                li.clearfix
+                    .col-xs-3 Asignaturas
+                    input#asignaturas.input-lg.col-xs-9.data(value=data.asignaturas, disabled)
+        else
+            .well-lg
+                .col-xs-10.col-xs-offset-1.error= err
+            a.col-xs-offset-5.col-xs-2.btn.btn-default(href="http://localhost:3000/" + db + "?v=alumnos") Atrás
     footer
         .navbar-fixed-bottom.navbar-inverse
             .col-lg-6.col-lg-offset-6.col-md-6.col-md-offset-6.col-sm-12.col-xs-12
                 span.col-xs-6 Sesión iniciada como:
-                span=user.facebook.email
+                if (user.facebook.email != null)
+                    span.username=user.facebook.email
+                if (user.twitter.username != null)
+                    span.username=user.twitter.username
+                if (user.email != null)
+                    span.username=user.email

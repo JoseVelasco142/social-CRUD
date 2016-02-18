@@ -4,8 +4,63 @@
 var DBNODE = DBNODE || {};
 
 DBNODE.prototype = {
-    selectDb: function(db){
-        window.location.href = 'http://localhost:3000/dbSwitch?db='+db;
+    logIn: function (email, password) {
+        $.ajax({
+            url: "http://localhost:3000/login",
+            type: 'POST',
+            data: {
+                'email': email,
+                'password': password
+            }
+        }).done(function (response) {
+            if (response != null) {
+                if (!response) {
+                    $('#loginForm').prepend(
+                        '<div class="alert-danger col-lg-7 col-lg-offset-4 col-md-7 col-md-offset-4 col-sm-10  col-xs-10">' +
+                        'Email o contrase&ntilde;a incorrecta' +
+                        '</div>'
+                    );
+                } else
+                    location.href = response;
+            } else {
+                $('#loginForm').prepend(
+                    '<div class="alert-danger col-lg-7 col-lg-offset-4 col-md-7 col-md-offset-4 col-sm-10  col-xs-10">' +
+                    'Ese email aun no esta registrado' +
+                    '</div>'
+                );
+                setTimeout(function () {
+                    if (confirm('¿Aun no eres cliente?\n REGÍSTRATE') == true) {
+                        location.href = "http://localhost:3000/register";
+                    }
+                }, 3000);
+            }
+        });
+    },
+    registerSend: function (nombre, email, password) {
+        $.ajax({
+            url: "http://localhost:3000/register",
+            type: 'POST',
+            data: {
+                'name': nombre,
+                'email': email,
+                'password': password
+            }
+        }).done(function (response) {
+            if (!response) {
+                $('#registerForm').prepend(
+                    '<div class="alert-danger col-lg-7 col-lg-offset-4 col-md-7 col-md-offset-4 col-sm-10  col-xs-10">' +
+                    'Ya existe un usuario con ese email' +
+                    '</div>'
+                );
+            } else {
+                if (confirm('¿Quieres iniciar sesión ahora') == true) {
+                    location.href = "http://localhost:3000/";
+                }
+            }
+        });
+    },
+    selectDb: function (db) {
+        window.location.href = 'http://localhost:3000/dbSwitch?db=' + db;
     },
     actions: function (action, table, id) {
         var data = null;
@@ -121,7 +176,7 @@ DBNODE.prototype = {
                         url: "http://localhost:3000" + db + "?v=" + table + "&k=" + id + "&a=" + action,
                         type: 'DELETE'
                     }).done(function (data) {
-                        if(!alert(data + " eliminado correctamente"))
+                        if (!alert(data + " eliminado correctamente"))
                             location.href = "http://localhost:3000" + db + "?v=" + table;
                     });
                 }
@@ -136,6 +191,7 @@ DBNODE.prototype = {
                 break;
         }
     }
+
 };
 
 $(document).ready(function () {
@@ -164,10 +220,16 @@ $(document).ready(function () {
             });
         }, 1250);
     }
-    $('.dbType').click(function(){
-       DBNODE.prototype.selectDb($(this).attr('about'));
+    $('.dbType').click(function () {
+        DBNODE.prototype.selectDb($(this).attr('about'));
     });
     $('.action').click(function () {
         DBNODE.prototype.actions($(this).attr('action'), $(this).attr('about'), $(this).attr('accesskey'));
+    });
+    $('#sendLogIn').click(function () {
+        DBNODE.prototype.logIn($('#logInEmail').val(), $('#logInPassword').val());
+    });
+    $('#registerSend').click(function () {
+        DBNODE.prototype.registerSend($('#registerName').val(), $('#registerEmail').val(), $('#lregisterPassword').val());
     });
 });

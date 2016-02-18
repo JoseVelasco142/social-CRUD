@@ -4,7 +4,7 @@
 var passport = require('passport'),
     FacebookStrategy = require('passport-facebook').Strategy,
     mongoose = require('mongoose'),
-    User = require("../models/users"),
+    User = require("../schemas/users"),
     fbConfig = require('./appsData/facebook.js');
 
 module.exports = function(passport) {
@@ -18,9 +18,7 @@ module.exports = function(passport) {
             process.nextTick(function() {
                 User.findOne({ 'id' : profile.id },
                     function(err, user) {
-                    if (err){
-                        return done(err);
-                    }
+                        if (err)  return done(err);
                     if (user) {
                         return done(null, user);
                     } else {
@@ -30,12 +28,9 @@ module.exports = function(passport) {
                         newUser.facebook.firstName  = profile.name.givenName;
                         newUser.facebook.lastName = profile.name.familyName;
                         newUser.facebook.email = profile.emails[0].value;
-
                         newUser.save(function(err) {
                             if (err)
                                 throw err;
-
-                            // if successful, return the new user
                             return done(null, newUser);
                         });
                     }
@@ -43,6 +38,6 @@ module.exports = function(passport) {
                 });
             });
 
-        }));
-
+        })
+    );
 };

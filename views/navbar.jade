@@ -1,0 +1,15 @@
+//  Created by root on 13/02/16.
+extends layout
+
+block content
+    // NAVBAR LOCATION
+    #navigationMenu.col-xs-11.btn-group-lg.nav.navbar-nav.navbar-fixed-top
+        a#home.col-xs-1.btn.glyphicon.glyphicon-home(href="http://localhost:3000/dbSwitch")
+        a#logOut.col-xs-1.btn.glyphicon.glyphicon-log-out(type='button', href="http://localhost:3000/signout")
+        // NAVBAR OF TABLES
+        #tableSelector.col-xs-8.col-xs-offset-2
+            a.col-xs-4.btn.btnTableSelector(href="http://localhost:3000/"+db+"?v=alumnos") Alumnos
+            a.col-xs-4.btn.btnTableSelector(href="http://localhost:3000/"+db+"?v=profesores") Profesores
+            a.col-xs-4.btn.btnTableSelector(href="http://localhost:3000/"+db+"?v=asignaturas") Asignaturas
+    .clearfix
+    block view

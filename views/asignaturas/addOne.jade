@@ -1,42 +1,34 @@
 //
    Created by root on 6/02/16.
-extends ../layout
+extends ../navbar
+block view
+    //ACTIONS
+    #actions.col-xs-10.col-xs-offset-1
+        a.col-xs-3.col-xs-offset-1.btn.action(about="asignaturas", action="addOne") Añadir
+        a.col-xs-offset-6.col-xs-1.btn.action(href="http://localhost:3000/"+db+"?v=asignaturas") Atras
 
-block content
-    body
-        // NAVBAR LOCATION
-        #navigationMenu.col-xs-11.btn-group-lg.nav.navbar-nav
-            a#home.col-xs-1.btn.glyphicon.glyphicon-home(href="http://localhost:3000/dbSwitch")
-            a#logOut.col-xs-1.btn.glyphicon.glyphicon-log-out(type='button')
-            // NAVBAR OF TABLES
-            #tableSelector.col-xs-8.col-xs-offset-2
-                a.col-xs-4.btn.btnTableSelector(href="http://localhost:3000/"+db+"?v=alumnos") Alumnos
-                a.col-xs-4.btn.btnTableSelector(href="http://localhost:3000/"+db+"?v=profesores") Profesores
-                a.col-xs-4.btn.btnTableSelector(href="http://localhost:3000/"+db+"?v=asignaturas") Asignaturas
-        .clearfix
-
-        //ACTIONS
-        #actions.col-xs-10.col-xs-offset-1
-            a.col-xs-3.col-xs-offset-1.btn.action(about="asignaturas", action="addOne") Añadir
-            a.col-xs-offset-6.col-xs-1.btn.action(href="http://localhost:3000/"+db+"?v=asignaturas") Atras
-
-        // VIEWER
-        #viewerOne.container.col-xs-8.col-xs-offset-2
-            ul
-                li.clearfix.hidden
-                    input#id(value="")
-                li.clearfix
-                    .col-xs-3 Nombre
-                    input#name.input-lg.col-xs-9(value="")
-                li.clearfix
-                    .col-xs-3 Descripción
-                    input#descripcion.input-lg.col-xs-9(value="")
-                li.clearfix
-                    .col-xs-3 Profesor
-                    input#profesor.input-lg.col-xs-9(value="")
+    // VIEWER
+    #viewerOne.container.col-xs-8.col-xs-offset-2
+        ul
+            li.clearfix.hidden
+                input#id(value="")
+            li.clearfix
+                .col-xs-3 Nombre
+                input#name.input-lg.col-xs-9(value="")
+            li.clearfix
+                .col-xs-3 Descripción
+                input#descripcion.input-lg.col-xs-9(value="")
+            li.clearfix
+                .col-xs-3 Profesor
+                input#profesor.input-lg.col-xs-9(value="")
 
     footer
         .navbar-fixed-bottom.navbar-inverse
             .col-lg-6.col-lg-offset-6.col-md-6.col-md-offset-6.col-sm-12.col-xs-12
                 span.col-xs-6 Sesión iniciada como:
-                span=user.facebook.email
+                if (user.facebook.email != null)
+                    span.username=user.facebook.email
+                if (user.twitter.username != null)
+                    span.username=user.twitter.username
+                if (user.email != null)
+                    span.username=user.email
