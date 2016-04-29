@@ -1,2 +1,2 @@
 # social-CRUD
-Simple RESTful web application NodeJS implementing social and login with MongoDB and SQLite CRUD
+Simple Restful nodejs web application implementing social login and handle connection with databases MongoDB and SQLite
